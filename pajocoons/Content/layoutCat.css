@@ -1,0 +1,50 @@
+
+#containerContent{
+	text-align: center;
+	height: 700px;
+}
+#containerSection1{
+	height: 350px;
+	width: 1280px;
+}
+.containerFoto{
+	margin-left: 20px;
+	margin-top: 20px;
+	height: 300px;
+	width: 400px;
+	float: left;
+}
+.containerTekst{
+	margin-top: 20px;
+	margin-right: 20px;
+	float: right;
+	height: 300px;
+	width: 800px;
+	border: 1px solid #4F6A95;
+}
+.containerTekst p{
+	margin-top: 10px;
+}
+#containerSection2{
+	height: 340px;
+	width: 1280px;
+}
+
+.containerMale{
+	float: left;
+	width: 600px;
+}
+.containerFemale{
+	float: right;
+	width: 600px;
+}
+.picParents{
+	height: 200px;
+	width: 300px;
+
+}
+#textParents{
+	color: green;
+}
+
+

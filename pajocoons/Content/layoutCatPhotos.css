@@ -1,0 +1,26 @@
+
+#containerContent{
+	height: 750px;
+}
+.containerPhoto{
+	border: 2px solid black;
+	height: 746px;
+	width: 1024px;
+	float: left;
+}
+.containerPhoto img{
+	margin-top: 20px;
+	margin-left: 10px;
+	height: 700px;
+	width: 1024px;
+}
+.containerPhotos{
+	padding-top: 20px;
+	height: 746px;
+	width: 230px;
+	float: right;
+}
+.containerPhotos img{
+	height: 50px;
+	width: 100px;
+}

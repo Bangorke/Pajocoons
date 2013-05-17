@@ -1,0 +1,37 @@
+
+#containerContent{
+	height: auto;
+}
+	
+#containerSection1{
+	height: 350px;
+	width: 1240px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+#containerSection2{
+	height: 350px;
+	width: 1240px;
+	
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 10px;
+}
+.containerFoto{
+	text-align: center;
+	height: 300px;
+	width: 400px;
+	float: left;
+}
+.containerTekst{
+	float: right;
+	height: 300px;
+	width: 800px;
+	border: 1px solid #4F6A95;
+}
+.containerTekst p{
+	margin-top: 10px;
+}
+

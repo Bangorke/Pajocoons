@@ -1,0 +1,27 @@
+#containerContent{
+	height: 700px;
+}
+.content1{
+	
+	height: 350px;
+	width: 640px;
+	float: left;
+}
+.content1 image{
+	margin-top: 20px;
+}
+.content2{
+	
+	height: 350px;
+	width: 640px;
+	float: right;
+}
+.content2 image{
+	margin-top: 20px;
+}
+#containerContent a{
+	font-size: 20px;
+}
+#containerContent{
+	text-align: center;
+}

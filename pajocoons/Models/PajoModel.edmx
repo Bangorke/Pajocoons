@@ -1,0 +1,430 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PajoDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="PajoDBModelStoreContainer">
+          <EntitySet Name="Aanvraag" EntityType="PajoDBModel.Store.Aanvraag" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Account" EntityType="PajoDBModel.Store.Account" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Adres" EntityType="PajoDBModel.Store.Adres" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Bericht" EntityType="PajoDBModel.Store.Bericht" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Persoon" EntityType="PajoDBModel.Store.Persoon" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Setting" EntityType="PajoDBModel.Store.Setting" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Aanvraag_Persoon" Association="PajoDBModel.Store.FK_Aanvraag_Persoon">
+            <End Role="Persoon" EntitySet="Persoon" />
+            <End Role="Aanvraag" EntitySet="Aanvraag" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bericht_Persoon" Association="PajoDBModel.Store.FK_Bericht_Persoon">
+            <End Role="Persoon" EntitySet="Persoon" />
+            <End Role="Bericht" EntitySet="Bericht" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Persoon_Account" Association="PajoDBModel.Store.FK_Persoon_Account">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Persoon" EntitySet="Persoon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Persoon_Adres" Association="PajoDBModel.Store.FK_Persoon_Adres">
+            <End Role="Adres" EntitySet="Adres" />
+            <End Role="Persoon" EntitySet="Persoon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Persoon_Setting" Association="PajoDBModel.Store.FK_Persoon_Setting">
+            <End Role="Setting" EntitySet="Setting" />
+            <End Role="Persoon" EntitySet="Persoon" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Aanvraag">
+          <Key>
+            <PropertyRef Name="aanvraagID" />
+          </Key>
+          <Property Name="aanvraagID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="aanvraagDatum" Type="nvarchar" MaxLength="50" />
+          <Property Name="beschrijving" Type="nvarchar(max)" />
+          <Property Name="kleur" Type="nvarchar" MaxLength="50" />
+          <Property Name="type" Type="nvarchar" MaxLength="50" />
+          <Property Name="karakter" Type="nvarchar" MaxLength="50" />
+          <Property Name="geslacht" Type="nvarchar" MaxLength="50" />
+          <Property Name="persoonID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="accountID" />
+          </Key>
+          <Property Name="accountID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="gebruikersnaam" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="code" Type="int" />
+          <Property Name="rol" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Adres">
+          <Key>
+            <PropertyRef Name="adresID" />
+          </Key>
+          <Property Name="adresID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="straatnaam" Type="nvarchar" MaxLength="50" />
+          <Property Name="huisnummer" Type="nvarchar" MaxLength="50" />
+          <Property Name="postcode" Type="nvarchar" MaxLength="50" />
+          <Property Name="gemeente" Type="nvarchar" MaxLength="50" />
+          <Property Name="land" Type="nvarchar" MaxLength="50" />
+          <Property Name="postbus" Type="nvarchar" MaxLength="50" />
+          <Property Name="provincie" Type="nvarchar" MaxLength="50" />
+          <Property Name="stad" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Bericht">
+          <Key>
+            <PropertyRef Name="berichtID" />
+          </Key>
+          <Property Name="berichtID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="berichtDatum" Type="nvarchar" MaxLength="50" />
+          <Property Name="beschrijving" Type="nvarchar(max)" />
+          <Property Name="persoonID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Persoon">
+          <Key>
+            <PropertyRef Name="persoonID" />
+          </Key>
+          <Property Name="persoonID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="voornaam" Type="nvarchar" MaxLength="50" />
+          <Property Name="achternaam" Type="nvarchar" MaxLength="50" />
+          <Property Name="geboortedatum" Type="nvarchar" MaxLength="50" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" />
+          <Property Name="accountID" Type="int" Nullable="false" />
+          <Property Name="adresID" Type="int" Nullable="false" />
+          <Property Name="settingID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="settingID" />
+          </Key>
+          <Property Name="settingID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="taal" Type="nvarchar" MaxLength="50" />
+          <Property Name="kleur" Type="nvarchar" MaxLength="50" />
+          <Property Name="favoriet" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Aanvraag_Persoon">
+          <End Role="Persoon" Type="PajoDBModel.Store.Persoon" Multiplicity="1" />
+          <End Role="Aanvraag" Type="PajoDBModel.Store.Aanvraag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persoon">
+              <PropertyRef Name="persoonID" />
+            </Principal>
+            <Dependent Role="Aanvraag">
+              <PropertyRef Name="persoonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bericht_Persoon">
+          <End Role="Persoon" Type="PajoDBModel.Store.Persoon" Multiplicity="1" />
+          <End Role="Bericht" Type="PajoDBModel.Store.Bericht" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persoon">
+              <PropertyRef Name="persoonID" />
+            </Principal>
+            <Dependent Role="Bericht">
+              <PropertyRef Name="persoonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Persoon_Account">
+          <End Role="Account" Type="PajoDBModel.Store.Account" Multiplicity="1" />
+          <End Role="Persoon" Type="PajoDBModel.Store.Persoon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="accountID" />
+            </Principal>
+            <Dependent Role="Persoon">
+              <PropertyRef Name="accountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Persoon_Adres">
+          <End Role="Adres" Type="PajoDBModel.Store.Adres" Multiplicity="1" />
+          <End Role="Persoon" Type="PajoDBModel.Store.Persoon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adres">
+              <PropertyRef Name="adresID" />
+            </Principal>
+            <Dependent Role="Persoon">
+              <PropertyRef Name="adresID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Persoon_Setting">
+          <End Role="Setting" Type="PajoDBModel.Store.Setting" Multiplicity="1" />
+          <End Role="Persoon" Type="PajoDBModel.Store.Persoon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Setting">
+              <PropertyRef Name="settingID" />
+            </Principal>
+            <Dependent Role="Persoon">
+              <PropertyRef Name="settingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PajoDBModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="PajoDBObjecten" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Aanvraag" EntityType="PajoDBModel.Aanvraag" />
+          <EntitySet Name="Account" EntityType="PajoDBModel.Account" />
+          <EntitySet Name="Adres" EntityType="PajoDBModel.Adres" />
+          <EntitySet Name="Bericht" EntityType="PajoDBModel.Bericht" />
+          <EntitySet Name="Persoon" EntityType="PajoDBModel.Persoon" />
+          <EntitySet Name="Setting" EntityType="PajoDBModel.Setting" />
+          <AssociationSet Name="FK_Aanvraag_Persoon" Association="PajoDBModel.FK_Aanvraag_Persoon">
+            <End Role="Persoon" EntitySet="Persoon" />
+            <End Role="Aanvraag" EntitySet="Aanvraag" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Persoon_Account" Association="PajoDBModel.FK_Persoon_Account">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Persoon" EntitySet="Persoon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Persoon_Adres" Association="PajoDBModel.FK_Persoon_Adres">
+            <End Role="Adres" EntitySet="Adres" />
+            <End Role="Persoon" EntitySet="Persoon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bericht_Persoon" Association="PajoDBModel.FK_Bericht_Persoon">
+            <End Role="Persoon" EntitySet="Persoon" />
+            <End Role="Bericht" EntitySet="Bericht" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Persoon_Setting" Association="PajoDBModel.FK_Persoon_Setting">
+            <End Role="Setting" EntitySet="Setting" />
+            <End Role="Persoon" EntitySet="Persoon" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Aanvraag">
+          <Key>
+            <PropertyRef Name="aanvraagID" />
+          </Key>
+          <Property Name="aanvraagID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="aanvraagDatum" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="beschrijving" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="kleur" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="type" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="karakter" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="geslacht" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="persoonID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Persoon" Relationship="PajoDBModel.FK_Aanvraag_Persoon" FromRole="Aanvraag" ToRole="Persoon" />
+        </EntityType>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="accountID" />
+          </Key>
+          <Property Name="accountID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="gebruikersnaam" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="rol" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Type="Int32" Name="code" />
+        </EntityType>
+        <EntityType Name="Adres">
+          <Key>
+            <PropertyRef Name="adresID" />
+          </Key>
+          <Property Name="adresID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="straatnaam" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="huisnummer" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="postcode" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="gemeente" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="land" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="postbus" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="provincie" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="stad" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Bericht">
+          <Key>
+            <PropertyRef Name="berichtID" />
+          </Key>
+          <Property Name="berichtID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="berichtDatum" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="beschrijving" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="persoonID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Persoon" Relationship="PajoDBModel.FK_Bericht_Persoon" FromRole="Bericht" ToRole="Persoon" />
+        </EntityType>
+        <EntityType Name="Persoon">
+          <Key>
+            <PropertyRef Name="persoonID" />
+          </Key>
+          <Property Name="persoonID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="voornaam" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="achternaam" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="geboortedatum" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="email" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="accountID" Type="Int32" Nullable="false" />
+          <Property Name="adresID" Type="Int32" Nullable="false" />
+          <Property Name="settingID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Aanvraag" Relationship="PajoDBModel.FK_Aanvraag_Persoon" FromRole="Persoon" ToRole="Aanvraag" />
+          <NavigationProperty Name="Account" Relationship="PajoDBModel.FK_Persoon_Account" FromRole="Persoon" ToRole="Account" />
+          <NavigationProperty Name="Adres" Relationship="PajoDBModel.FK_Persoon_Adres" FromRole="Persoon" ToRole="Adres" />
+          <NavigationProperty Name="Bericht" Relationship="PajoDBModel.FK_Bericht_Persoon" FromRole="Persoon" ToRole="Bericht" />
+          <NavigationProperty Name="Setting" Relationship="PajoDBModel.FK_Persoon_Setting" FromRole="Persoon" ToRole="Setting" />
+        </EntityType>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="settingID" />
+          </Key>
+          <Property Name="settingID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="taal" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="kleur" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="favoriet" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Aanvraag_Persoon">
+          <End Role="Persoon" Type="PajoDBModel.Persoon" Multiplicity="1" />
+          <End Role="Aanvraag" Type="PajoDBModel.Aanvraag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persoon">
+              <PropertyRef Name="persoonID" />
+            </Principal>
+            <Dependent Role="Aanvraag">
+              <PropertyRef Name="persoonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Persoon_Account">
+          <End Role="Account" Type="PajoDBModel.Account" Multiplicity="1" />
+          <End Role="Persoon" Type="PajoDBModel.Persoon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="accountID" />
+            </Principal>
+            <Dependent Role="Persoon">
+              <PropertyRef Name="accountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Persoon_Adres">
+          <End Role="Adres" Type="PajoDBModel.Adres" Multiplicity="1" />
+          <End Role="Persoon" Type="PajoDBModel.Persoon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adres">
+              <PropertyRef Name="adresID" />
+            </Principal>
+            <Dependent Role="Persoon">
+              <PropertyRef Name="adresID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bericht_Persoon">
+          <End Role="Persoon" Type="PajoDBModel.Persoon" Multiplicity="1" />
+          <End Role="Bericht" Type="PajoDBModel.Bericht" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persoon">
+              <PropertyRef Name="persoonID" />
+            </Principal>
+            <Dependent Role="Bericht">
+              <PropertyRef Name="persoonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Persoon_Setting">
+          <End Role="Setting" Type="PajoDBModel.Setting" Multiplicity="1" />
+          <End Role="Persoon" Type="PajoDBModel.Persoon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Setting">
+              <PropertyRef Name="settingID" />
+            </Principal>
+            <Dependent Role="Persoon">
+              <PropertyRef Name="settingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PajoDBModelStoreContainer" CdmEntityContainer="PajoDBObjecten">
+          <EntitySetMapping Name="Aanvraag">
+            <EntityTypeMapping TypeName="PajoDBModel.Aanvraag">
+              <MappingFragment StoreEntitySet="Aanvraag">
+                <ScalarProperty Name="aanvraagID" ColumnName="aanvraagID" />
+                <ScalarProperty Name="aanvraagDatum" ColumnName="aanvraagDatum" />
+                <ScalarProperty Name="beschrijving" ColumnName="beschrijving" />
+                <ScalarProperty Name="kleur" ColumnName="kleur" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="karakter" ColumnName="karakter" />
+                <ScalarProperty Name="geslacht" ColumnName="geslacht" />
+                <ScalarProperty Name="persoonID" ColumnName="persoonID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Account">
+            <EntityTypeMapping TypeName="PajoDBModel.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="accountID" ColumnName="accountID" />
+                <ScalarProperty Name="gebruikersnaam" ColumnName="gebruikersnaam" />
+                <ScalarProperty Name="rol" ColumnName="rol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Adres">
+            <EntityTypeMapping TypeName="PajoDBModel.Adres">
+              <MappingFragment StoreEntitySet="Adres">
+                <ScalarProperty Name="adresID" ColumnName="adresID" />
+                <ScalarProperty Name="straatnaam" ColumnName="straatnaam" />
+                <ScalarProperty Name="huisnummer" ColumnName="huisnummer" />
+                <ScalarProperty Name="postcode" ColumnName="postcode" />
+                <ScalarProperty Name="gemeente" ColumnName="gemeente" />
+                <ScalarProperty Name="land" ColumnName="land" />
+                <ScalarProperty Name="postbus" ColumnName="postbus" />
+                <ScalarProperty Name="provincie" ColumnName="provincie" />
+                <ScalarProperty Name="stad" ColumnName="stad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bericht">
+            <EntityTypeMapping TypeName="PajoDBModel.Bericht">
+              <MappingFragment StoreEntitySet="Bericht">
+                <ScalarProperty Name="berichtID" ColumnName="berichtID" />
+                <ScalarProperty Name="berichtDatum" ColumnName="berichtDatum" />
+                <ScalarProperty Name="beschrijving" ColumnName="beschrijving" />
+                <ScalarProperty Name="persoonID" ColumnName="persoonID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Persoon">
+            <EntityTypeMapping TypeName="PajoDBModel.Persoon">
+              <MappingFragment StoreEntitySet="Persoon">
+                <ScalarProperty Name="persoonID" ColumnName="persoonID" />
+                <ScalarProperty Name="voornaam" ColumnName="voornaam" />
+                <ScalarProperty Name="achternaam" ColumnName="achternaam" />
+                <ScalarProperty Name="geboortedatum" ColumnName="geboortedatum" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="accountID" ColumnName="accountID" />
+                <ScalarProperty Name="adresID" ColumnName="adresID" />
+                <ScalarProperty Name="settingID" ColumnName="settingID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Setting">
+            <EntityTypeMapping TypeName="PajoDBModel.Setting">
+              <MappingFragment StoreEntitySet="Setting">
+                <ScalarProperty Name="settingID" ColumnName="settingID" />
+                <ScalarProperty Name="taal" ColumnName="taal" />
+                <ScalarProperty Name="kleur" ColumnName="kleur" />
+                <ScalarProperty Name="favoriet" ColumnName="favoriet" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
